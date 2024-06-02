@@ -11,7 +11,6 @@ export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         username: '',
         name: '',
-        email: '',
         password: '',
         password_confirmation: '',
     });
@@ -34,7 +33,7 @@ export default function Register() {
             <Typography variant='h5' className='text-center'> Register </Typography>
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="username" value="User Name" />
+                    <InputLabel htmlFor="username" value="Username" />
                     <TextInput
                         id="username"
                         name="username"
@@ -63,22 +62,6 @@ export default function Register() {
                     <InputError message={errors.name} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        onChange={(e) => setData('email', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
 
                 <div className="mt-4">
                     <InputLabel htmlFor="password" value="Password" />

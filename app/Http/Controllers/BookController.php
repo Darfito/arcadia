@@ -13,15 +13,18 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all();
+        // dd($books);
         return inertia('Dashboard', ['books' => $books]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function tersediaView()
     {
-        //
+        $books = Book::all();
+        // dd($books);
+        return inertia('BukuTersedia', ['books' => $books]);
     }
 
     /**

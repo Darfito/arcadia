@@ -1,11 +1,12 @@
 import { Link, Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
-import { Children } from 'react';
-import { Box, Button, Typography } from '@mui/material';
-import ActionAreaCard from '@/Components/CardItems';
-import Navbar from '@/Components/Navbar';
+import { Children, Key } from 'react';
+import { Box, Button, Grid, Typography } from '@mui/material';
 
-export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: string, phpVersion: string }>) {
+import Navbar from '@/Components/Navbar';
+import ActionAreaCard from '@/Components/Card';
+
+export default function Welcome({ books,auth, laravelVersion, phpVersion }: PageProps<{ books: any,laravelVersion: string, phpVersion: string }>) {
     const handleImageError = () => {
         document.getElementById('screenshot-container')?.classList.add('!hidden');
         document.getElementById('docs-card')?.classList.add('!row-span-1');
@@ -26,23 +27,45 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                        </Navbar>
 
                         <main className="mt-6">
-                            <Box sx={
-                                {
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    height: '100%',
-                                    width: '100%',
-                                    gap: '1rem'
-                                }
-                             }>
-                         <div className="card-items flex flex-row w-full align-middle justify-around">
-                         <ActionAreaCard image={'/public/img/bumi.jpg'} judul={'Bumi'}/>
-                         <ActionAreaCard image={'/public/img/bumi.jpg'} judul={'Laut Bercerita'}/>
-                         <ActionAreaCard image={'/public/img/bumi.jpg'} judul={'Percy Jackson Lightning Thief'}/>           
-                         </div>
-                            </Box>
+                        <Box className="rounded py-8">
+                    <Grid
+                        className="py-8"
+                        direction="row"
+                        justifyContent="center"
+                        alignItems="center"
+                        container
+                        spacing={2}
+                    >
+                        <Grid
+                            className="py-8"
+                            direction="row"
+                            justifyContent="center"
+                            alignItems="center"
+                            container
+                            spacing={2}
+                        >
+                            {books.map(
+                                (book: any, index: Key | null | undefined) => (
+                                    <Grid
+                                        item
+                                        xs={4}
+                                        lg={4}
+                                        xl={4}
+                                        key={index}
+                                        sx={{
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            flexGrow: 1,
+                                        }}
+                                    >
+                                        <ActionAreaCard books={book} />
+                                    </Grid>
+                                )
+                            )}
+                        </Grid>
+                    </Grid>
+                </Box>
                         
                         </main>
 

@@ -2,14 +2,24 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import DataTable from '@/Components/Table';
+import { GridColDef } from '@mui/x-data-grid';
 
 
 
-const Dashboard = ({ auth, books }: PageProps) =>{
+
+const Dashboard = ({ auth, books }: PageProps<{books:any}>) =>{
+    const columns: GridColDef[] = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'judul', headerName: 'Judul', width: 130 }, // Ganti dengan kolom yang sesuai
+        { field: 'tgl_terbit', headerName: 'Tanggal Terbit', width: 130 }, // Ganti dengan kolom yang sesuai
+        { field: 'nama_penulis', headerName: 'Nama Penulis', width: 130 }, // Ganti dengan kolom yang sesuai
+        { field: 'nama_penerbit', headerName: 'Nama Penerbit', width: 130 }, // Ganti dengan kolom yang sesuai
+        {field: 'action', headerName: 'Action', width: 130, renderCell: () => <button>kurang</button>},
+      ];
     return (
         <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Peminjaman</h2>}
+        user={auth.user}
+        header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Peminjaman</h2>}
         >
             <Head title="Dashboard" />
 
@@ -19,7 +29,7 @@ const Dashboard = ({ auth, books }: PageProps) =>{
                         <div className="p-6 text-gray-900">
                             <div className="buttonAction">
                             </div>
-                        <DataTable books={books}/>
+                        <DataTable columns={columns} books={books}/>
                         </div>
                     </div>
                 </div>

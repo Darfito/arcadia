@@ -57,15 +57,21 @@ class BookSeeder extends Seeder
                 'nama_penerbit' => 'Gramedia Pustaka Utama',
             ],
             [
-                'judul' => 'The Hobbit',
+                'judul' => 'The Kata',
                 'tgl_terbit' => Carbon::createFromFormat('Y-m-d','2019-08-30'),
-                'nama_penulis' => 'J.R.R. Tolkien',
+                'nama_penulis' => 'Rintik Sedu',
                 'nama_penerbit' => 'Gramedia Pustaka Utama',    
             ],
             [
                 'judul' => 'Laut Bercerita',
                 'tgl_terbit' => Carbon::createFromFormat('Y-m-d','2020-08-30'),
                 'nama_penulis' => 'Tere Liye',
+                'nama_penerbit' => 'Gramedia Pustaka Utama',
+            ],
+            [
+                'judul' => 'Manusia Setengah Salmon',
+                'tgl_terbit' => Carbon::createFromFormat('Y-m-d','2015-08-30'),
+                'nama_penulis' => 'Rade Rizkia',
                 'nama_penerbit' => 'Gramedia Pustaka Utama',
             ],
         ];
