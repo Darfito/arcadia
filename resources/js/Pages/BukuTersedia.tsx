@@ -4,6 +4,7 @@ import { PageProps } from "@/types";
 import DataTable from "@/Components/Table";
 import { GridColDef } from "@mui/x-data-grid";
 import { Button, Link } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 
 const BukuTersedia = ({ auth, books }: PageProps<{ books: any }>) => {
     const columns: GridColDef[] = [
@@ -12,12 +13,6 @@ const BukuTersedia = ({ auth, books }: PageProps<{ books: any }>) => {
         { field: "tgl_terbit", headerName: "Tanggal Terbit", width: 130 }, // Ganti dengan kolom yang sesuai
         { field: "nama_penulis", headerName: "Nama Penulis", width: 130 }, // Ganti dengan kolom yang sesuai
         { field: "nama_penerbit", headerName: "Nama Penerbit", width: 130 }, // Ganti dengan kolom yang sesuai
-        {
-            field: "action",
-            headerName: "Action",
-            width: 130,
-            renderCell: () => <button>add</button>,
-        },
     ];
     return (
         <AuthenticatedLayout
@@ -34,15 +29,6 @@ const BukuTersedia = ({ auth, books }: PageProps<{ books: any }>) => {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <div className="buttonAction my-8">
-                                <Button variant="contained">
-                                    <Link sx={{ 
-                                        color: 'white',
-                                     }} href="#" underline="none">
-                                        {'Pinjam Buku'}
-                                    </Link>
-                                </Button>
-                            </div>
                             <DataTable columns={columns} books={books} />
                         </div>
                     </div>

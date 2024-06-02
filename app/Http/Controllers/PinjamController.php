@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class PinjamController extends Controller
@@ -18,11 +20,37 @@ class PinjamController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function handleSelectedBooks(Request $request)
     {
-        
-
+        $selectedBooks = $request->input('selectedBooks');
+        // Process the selected books data
+        // dd($selectedBooks);
+        return Inertia::render('PinjamFiles/Pinjam', ['selectedBooks' => $selectedBooks]);
     }
+
+    public function createPeminjam(Request $request)
+{
+    $tgl_ambil = $request->input('tgl_ambil');
+    $tgl_wajibkembali = $request->input('tgl_wajibkembali');
+    
+    // Dapatkan user yang sedang login
+    $user = Auth::user();
+    
+    // Buat instance Peminjaman
+    $peminjam = new Peminjaman();
+    
+    // Set nilai atribut
+    $peminjam->tgl_ambil = $tgl_ambil;
+    $peminjam->user_id = $user->id; // Set user_id
+    $peminjam->tgl_wajibkembali = $tgl_wajibkembali;
+    
+    // Simpan peminjaman
+    $peminjam->save();
+    
+    // Redirect ke dashboard
+    return redirect('dashboard');
+}
+    
 
     /**
      * Store a newly created resource in storage.

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -12,9 +13,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
+        $peminjams = Peminjaman::all();
         // dd($books);
-        return inertia('Dashboard', ['books' => $books]);
+        return inertia('Dashboard', ['peminjams' => $peminjams]);
     }
 
     /**
