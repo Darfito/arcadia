@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->time('tgl_terbit');
+            $table->date('tgl_terbit');
             $table->string('nama_penulis');
             $table->string('nama_penerbit');
             $table->timestamps();

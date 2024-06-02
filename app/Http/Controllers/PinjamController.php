@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\detil_peminjaman;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,8 @@ class PinjamController extends Controller
 
     public function createPeminjam(Request $request)
 {
+    // Ambil data dari request
+    $selectedBooks = $request->input('selectedBooks');
     $tgl_ambil = $request->input('tgl_ambil');
     $tgl_wajibkembali = $request->input('tgl_wajibkembali');
     
@@ -39,13 +42,26 @@ class PinjamController extends Controller
     // Buat instance Peminjaman
     $peminjam = new Peminjaman();
     
-    // Set nilai atribut
+    // Set nilai atribut peminjaman
     $peminjam->tgl_ambil = $tgl_ambil;
-    $peminjam->user_id = $user->id; // Set user_id
+    $peminjam->user_id = $user->id;
     $peminjam->tgl_wajibkembali = $tgl_wajibkembali;
     
     // Simpan peminjaman
     $peminjam->save();
+
+    // Iterasi melalui setiap buku yang dipilih
+    foreach ($selectedBooks as $book) {
+        // Ambil nilai id buku dari setiap objek buku
+        $bookId = $book['id'];
+        
+        // Buat instance detil_peminjaman untuk setiap buku yang dipinjam
+        $detil_peminjaman = new detil_peminjaman();
+        $detil_peminjaman->kode_pinjam = $peminjam->id;
+        $detil_peminjaman->peminjam_id = $user->id;
+        $detil_peminjaman->buku_id = $bookId;
+        $detil_peminjaman->save();
+    }
     
     // Redirect ke dashboard
     return redirect('dashboard');

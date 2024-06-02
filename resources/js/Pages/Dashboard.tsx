@@ -8,9 +8,10 @@ const Dashboard = ({ auth, peminjams }: PageProps<{ peminjams: any }>) => {
     const columns: GridColDef[] = [
         { field: "id", headerName: "ID", width: 70 },
         { field: "judul", headerName: "Judul", width: 130 }, // Ganti dengan kolom yang sesuai
-        { field: "tgl_terbit", headerName: "Tanggal Terbit", width: 130 }, // Ganti dengan kolom yang sesuai
-        { field: "tgl_wajibkembali", headerName: "Tanggal Terbit", width: 130 }, // Ganti dengan kolom yang sesuai
+        { field: "tgl_ambil", headerName: "Tanggal Ambil", width: 130 }, // Ganti dengan kolom yang sesuai
+        { field: "tgl_wajibkembali", headerName: "Tanggal Kembali", width: 130 }, // Ganti dengan kolom yang sesuai
     ];
+    {console.log(peminjams)}
     return (
         <AuthenticatedLayout
             user={auth.user}

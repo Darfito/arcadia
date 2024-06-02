@@ -4,13 +4,15 @@ import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import GuestLayout from "@/Layouts/GuestLayout";
-import { FormEventHandler, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect } from "react";
+import { FormEventHandler, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
 import InputLabel from "@/Components/InputLabel";
 
 const Pinjam = ({selectedBooks}:any) => {
+    
     const { data, setData, post, processing, errors, reset } = useForm({
         tgl_ambil: "",
         tgl_wajibkembali: "",
+        selectedBooks: selectedBooks,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -84,6 +86,7 @@ const Pinjam = ({selectedBooks}:any) => {
                                 className="mt-2"
                             />
                         </div>
+                        <input type="hidden" name="selectedBooks" value={JSON.stringify(selectedBooks)} />
                         <div className="flex items-center justify-end mt-4">
                             <PrimaryButton
                                 className="ms-4"
