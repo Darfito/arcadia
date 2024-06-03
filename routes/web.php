@@ -23,13 +23,17 @@ Route::get('/', function () {
     ]);
 });
 
+
+
 Route::get('/dashboard', [BookController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/tersedia', [BookController::class,'tersediaView'])->middleware(['auth', 'verified'])->name('tersedia');
 Route::get('/tersedia/pinjam', [PinjamController::class, 'index'])->name('pinjam.index');
 Route::post('/tersedia/pinjam', [PinjamController::class, 'handleSelectedBooks'])->name('objek.buku');
 Route::post('/dashboard', [PinjamController::class, 'createPeminjam'])->name('pinjam.create');
+Route::delete('/dashboard/{id}', [PinjamController::class, 'destroy'])->name('pinjam.destroy');
 
 
+Route::get('/admin-dashboard',[AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('admin-dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

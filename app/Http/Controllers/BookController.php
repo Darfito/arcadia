@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -13,9 +14,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        $peminjams = Peminjaman::all();
-        // dd($books);
+        $peminjams = Peminjaman::where('user_id', Auth::user()->id)->get();
         return inertia('Dashboard', ['peminjams' => $peminjams]);
+        // $peminjams = Peminjaman::all();
+        // // dd($peminjams);
+        // return inertia('Dashboard', ['peminjams' => $peminjams]);
     }
 
     /**

@@ -66,10 +66,35 @@ class PinjamController extends Controller
     // Redirect ke dashboard
     return redirect('dashboard');
 }
-    
 
-    /**
-     * Store a newly created resource in storage.
+public function destroy(string $id)
+{
+    // Dapatkan user yang sedang login
+    $user = Auth::user();
+
+    // Hapus peminjaman jika pengguna adalah admin atau jika dia adalah pemilik peminjaman
+    $peminjam = Peminjaman::find($id);
+    if (!$peminjam) {
+        return redirect('dashboard')->with('error', 'Peminjaman tidak ditemukan');
+    }
+
+    if ($user->is_admin == 1 || $peminjam->user_id === $user->id) {
+        $peminjam->delete();
+
+        // Redirect ke dashboard sesuai status pengguna
+        if ($user->is_admin == 1) {
+            return redirect()->route('admin-dashboard');
+        } else {
+            return redirect('dashboard');
+        }
+    } else {
+        return redirect('dashboard')->with('error', 'Anda tidak memiliki izin untuk melakukan tindakan ini');
+    }
+}
+
+
+/**
+ * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
@@ -103,8 +128,4 @@ class PinjamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

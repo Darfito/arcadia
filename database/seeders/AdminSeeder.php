@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,11 +14,13 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        Admin::factory()->create(
+        User::create(
             [
-                'nama_admin'=> 'Admin',
-                'username_admin'=> 'admin',
-                'password_admin'=> bcrypt('admin'),
+                'name'=> 'Admin',
+                'username'=> 'admin',
+                'status_peminjam'=>0,
+                'is_admin'=>1,
+                'password'=> bcrypt('admin'),
             ]
         );
     }

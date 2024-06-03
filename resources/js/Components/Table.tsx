@@ -1,9 +1,9 @@
 import { router } from "@inertiajs/react";
-import { Button, Link } from "@mui/material";
+import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 
-export default function DataTable({ books, columns } : any) {
+export default function DataTable({ books, columns, showForm } : any) {
     const [value, setValues] = useState({
         selectedRowData: [],
     });
@@ -35,14 +35,16 @@ export default function DataTable({ books, columns } : any) {
                     checkboxSelection
                 />
             </div>
-            <form onSubmit={handleSubmit}>
-                <input type="hidden" name="selectedBooks" value={JSON.stringify(value.selectedRowData)} />
-                <div className="buttonAction my-8">
-                    <Button type="submit" sx={{ color: "white" }} variant="contained">
-                        Pinjam Buku
-                    </Button>
-                </div>
-            </form>
+            {showForm && (
+                <form onSubmit={handleSubmit}>
+                    <input type="hidden" name="selectedBooks" value={JSON.stringify(value.selectedRowData)} />
+                    <div className="buttonAction my-8">
+                        <Button type="submit" sx={{ color: "white" }} variant="contained">
+                            Pinjam Buku
+                        </Button>
+                    </div>
+                </form>
+            )}
             {/* {console.log(value.selectedRowData)} */}
         </>
     );

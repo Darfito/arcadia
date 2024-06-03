@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\detil_peminjaman;
+use App\Models\Peminjaman;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -11,9 +13,33 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Peminjaman $peminjaman)
     {
-        return Inertia::render('Auth/LoginAdmin');
+        $peminjaman= Peminjaman::all();
+        $peminjaman->load('user');
+        // dd($peminjaman);
+        return Inertia::render('AdminDashboard', [
+                'peminjaman' => $peminjaman
+                // 'allPeminjam' => $allPeminjam,
+            ]);
+        
+        // // Periksa apakah pengguna adalah admin
+        // if (Auth::check() && Auth::user()->is_admin == 1) {
+        //     // Muat relasi pengguna dengan peminjaman
+        //     $peminjaman->load('user');
+        //     dd($peminjaman);
+        //     // Ambil semua data peminjaman dengan relasi buku
+        //     // $allPeminjam = detil_peminjaman::with('book')->get();
+
+        //     // Kirim data ke Inertia
+        //     return Inertia::render('AdminDashboard', [
+        //         'peminjaman' => $peminjaman
+        //         // 'allPeminjam' => $allPeminjam,
+        //     ]);
+        // }
+
+        // Jika bukan admin, redirect ke halaman yang diinginkan
+        // return redirect('/');
     }
 
     /**
