@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import DataTable from "@/Components/Table";
 import { GridColDef } from "@mui/x-data-grid";
@@ -22,8 +22,8 @@ const Dashboard = ({ auth, peminjams }: PageProps<{ peminjams: any }>) => {
         { field: "tgl_ambil", headerName: "Tanggal Ambil", width: 130 }, // Adjust the column to match your data
         { field: "tgl_wajibkembali", headerName: "Tanggal Kembali", width: 130 }, // Adjust the column to match your data
         {
-            field: "actions",
-            headerName: "Actions",
+            field: "Delete",
+            headerName: "Delete",
             width: 150,
             renderCell: (params) => (
                 <form
@@ -40,6 +40,33 @@ const Dashboard = ({ auth, peminjams }: PageProps<{ peminjams: any }>) => {
                     >
                         Delete
                     </Button>
+                </form>
+            )
+        },
+        {
+            field: "Detail",
+            headerName: "Detail",
+            width: 150,
+            renderCell: (params) => (
+                // Add a link to the detail page
+                    <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        handleActionClick(params.row.id);
+                    }}
+                >
+                    <input type="hidden" name="id" value={params.row.id} />
+                    <Link
+                        href={route('pinjam.detail', { id: params.row.id })}
+                    >
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                        >
+                            Detail
+                        </Button>
+                    </Link>
                 </form>
             )
         }

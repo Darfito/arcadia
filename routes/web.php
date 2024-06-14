@@ -32,6 +32,7 @@ Route::post('/tersedia/pinjam', [PinjamController::class, 'handleSelectedBooks']
 Route::post('/dashboard', [PinjamController::class, 'createPeminjam'])->name('pinjam.create');
 Route::delete('/dashboard/{id}', [PinjamController::class, 'destroy'])->name('pinjam.destroy');
 
+Route::get('/dashboard/{id}/detail', [PinjamController::class, 'detail'])->name('pinjam.detail');
 
 Route::get('/admin-dashboard',[AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('admin-dashboard');
 

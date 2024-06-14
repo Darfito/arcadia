@@ -67,6 +67,14 @@ class PinjamController extends Controller
     return redirect('dashboard');
 }
 
+public function detail(string $id){
+
+    $peminjam = detil_peminjaman::find($id);
+    dd($peminjam);
+
+    return Inertia::render('PinjamFiles/DetailPinjam', ['peminjam' => $peminjam]);
+}
+
 public function destroy(string $id)
 {
     // Dapatkan user yang sedang login
